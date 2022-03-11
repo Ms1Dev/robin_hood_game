@@ -35,12 +35,18 @@
     <ClInclude Include="projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="standing.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="arrow.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="background.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

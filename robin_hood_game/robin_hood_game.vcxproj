@@ -145,12 +145,14 @@
     <ClInclude Include="display.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="char2Ansi.h" />
+    <ClInclude Include="background.h" />
     <ClInclude Include="projectile.h" />
     <ClInclude Include="unit.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="standing.txt" />
     <Text Include="arrow.txt" />
+    <Text Include="background.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

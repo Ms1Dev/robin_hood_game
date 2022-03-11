@@ -11,9 +11,23 @@ using namespace std;
 int main()
 {
 
+    int background[yPixels][xPixels];
+    
+    std::ifstream file("background.txt");
+    for (int i = 0; i < yPixels; i++) {
+        for (int j = 0; j < xPixels; j++) {
+            char pixel;
+            file >> pixel;
+            background[i][j] = cnvrt2ansi(pixel);
+        }
+    }
+    file.close();
+
+
+
     ProjectileManager projectileManager;
 
-    Unit unit(10, 60, 2, &projectileManager);
+    Unit unit(10, 44, 2, &projectileManager);
 
     unsigned long tickCount = 0;
 
@@ -32,7 +46,7 @@ int main()
             unit.update(display);
 
             draw();
-            reset_display();
+            reset_display(background);
 
             // get key input
             if ((GetKeyState(37) & 0x8000) && (unit.get_x() > 0)) {

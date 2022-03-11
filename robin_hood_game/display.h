@@ -58,9 +58,14 @@ void draw() {
 }
 
 
-void reset_display() {
+void reset_display(int (&background)[yPixels][xPixels]) {
     // reset the display array
-    memset(display, 0, sizeof(display));
+
+    for (int i = 0; i < yPixels; i++) {
+        for (int j = 0; j < xPixels; j++) {
+            display[i][j] = background[i][j];
+        }
+    }
 }
 
 void configure_console() {
