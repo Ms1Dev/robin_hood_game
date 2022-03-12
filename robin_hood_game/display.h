@@ -7,7 +7,6 @@
 
 using namespace std;
 
-// boolean matrix representing all pixels on screen
 int display[yPixels][xPixels];
 
 string text = "\033[41m";
@@ -58,15 +57,6 @@ void draw() {
 }
 
 
-void reset_display(int (&background)[yPixels][xPixels]) {
-    // reset the display array
-
-    for (int i = 0; i < yPixels; i++) {
-        for (int j = 0; j < xPixels; j++) {
-            display[i][j] = background[i][j];
-        }
-    }
-}
 
 void configure_console() {
     // set the font size 
@@ -78,8 +68,6 @@ void configure_console() {
     font.dwFontSize.X = pixelSize[0];
     font.dwFontSize.Y = pixelSize[1];
     SetCurrentConsoleFontEx(HANDLE, FALSE, &font);
-
-
 
 
 

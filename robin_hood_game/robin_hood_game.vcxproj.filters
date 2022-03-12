@@ -18,11 +18,17 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sprites.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="char2Ansi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="unit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -32,10 +38,13 @@
     <ClInclude Include="char2Ansi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="projectile.h">
+    <ClInclude Include="background.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="background.h">
+    <ClInclude Include="sprites.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -46,7 +55,28 @@
     <Text Include="arrow.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="background.txt">
+    <Text Include="bg.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="walking_1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="walking_2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="walking_3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="walking_4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="crouch.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="crouch_shoot.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="standing_shoot.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
