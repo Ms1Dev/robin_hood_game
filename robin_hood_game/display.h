@@ -69,42 +69,29 @@ void configure_console() {
     font.dwFontSize.Y = pixelSize[1];
     SetCurrentConsoleFontEx(HANDLE, FALSE, &font);
 
+    // prevent console from being resized
+    HWND consoleWindow = GetConsoleWindow();
+    SetWindowLong(consoleWindow, GWL_STYLE, GetWindowLong(consoleWindow, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
 
-
-    COORD bufferDim = { xPixels + 1,(yPixels / 2) + 1 };
-
+    // set screen buffer size
+    COORD bufferDim = { xPixels + 1, (yPixels / 2) + 1 };
     SetConsoleScreenBufferSize(
         HANDLE,
         bufferDim
     );
 
-    SMALL_RECT windowDim = { 0,0, xPixels,  (yPixels / 2) };
-
+    // set window size
+    SMALL_RECT windowDim = { 0,0, xPixels, (yPixels / 2) };
     SetConsoleWindowInfo(
         HANDLE,
         true,
         &windowDim
     );
 
-    // maximize the console window
-    HWND consoleWindow = GetConsoleWindow();
-    //ShowWindow(consoleWindow, SW_MAXIMIZE);
-
     // set cursor to invisible
     CONSOLE_CURSOR_INFO cursorInfo;
     cursorInfo.dwSize = 1;
     cursorInfo.bVisible = false;
     SetConsoleCursorInfo(HANDLE, &cursorInfo);
-
-    DWORD mode;
-    GetConsoleMode(HANDLE, &mode);
-    DWORD newMode = mode;
-    newMode &= ~ENABLE_WRAP_AT_EOL_OUTPUT;
-    newMode &= ENABLE_VIRTUAL_TERMINAL_INPUT;
-    SetConsoleMode(HANDLE, mode);
-
-    /*DWORD prev_mode;
-    GetConsoleMode(HANDLE, &prev_mode);
-    SetConsoleMode(HANDLE, (&prev_mode, ENABLE_WRAP_AT_EOL_OUTPUT));*/
 }
 

@@ -36,6 +36,7 @@ public:
     void set_y(int y);
     int get_height();
     int get_width();
+    int get_speed();
     void move_h(bool left = false);
     void move_v(bool up = false);
 
@@ -59,12 +60,15 @@ class ProjectileManager {
 private:
     // array of pointers to projectile objects
     Projectile* projectiles[PROJECTILE_MEM_SIZE] = {};
-public:
     ProjectileManager() {}
-
+    static ProjectileManager* instance;
+public:
+    
+    static ProjectileManager* getInstance();
     void add_projectile(Projectile* projectile);
     void update_projectiles(int(&display)[yPixels][xPixels]);
 };
+
 
 
 
@@ -78,8 +82,8 @@ private:
     const char* animation[WALKING_ANIMATIONS] = { "walking_1.txt", "walking_2.txt", "walking_3.txt", "walking_4.txt" };
 public:
 
-    Unit(int x, int y, int speed, ProjectileManager* projMan) :Sprite(x, y, speed, 32, 24, "standing.txt") {
-        projectileManager = projMan;
+    Unit(int x, int y, int speed) :Sprite(x, y, speed, 32, 24, "standing.txt") {
+        projectileManager = ProjectileManager::getInstance();
         state = 0;
         animationIndex = 0;
         animationSpeed = 5;

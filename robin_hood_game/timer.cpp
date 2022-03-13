@@ -1,6 +1,5 @@
 #include "timer.h"
 
-
 Timer* Timer::instance(nullptr);
 
 Timer::Timer() {

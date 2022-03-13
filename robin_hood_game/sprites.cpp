@@ -1,10 +1,6 @@
-#pragma once
-
-
 #include <fstream>
 #include "config.h"
 #include <cmath>
-//#include "projectile.h"
 #include "char2Ansi.h"
 #include "sprites.h"
 
@@ -60,6 +56,9 @@ int Sprite::get_height() {
 int Sprite::get_width() {
     return width;
 }
+int Sprite::get_speed() {
+    return speed;
+}
 void Sprite::move_h(bool left) {
     if (left) {
         x -= speed;
@@ -91,7 +90,7 @@ void Unit::shoot() {
         Projectile* newProjectile = new Projectile(x + 10, y + arrowOffset, 10);
         // try to add to projectile manager
         try {
-            (*this->projectileManager).add_projectile(newProjectile);
+            projectileManager->add_projectile(newProjectile);
         }
         catch (std::exception e) {
             // projectile manager with throw an exception if the array of projectiles is full
@@ -156,7 +155,6 @@ void Projectile::destroy() {
 
 
 
-
 void ProjectileManager::add_projectile(Projectile* projectile) {
     bool hasSpace = false;
     // iterate over all the slots and add to first empty one
@@ -190,4 +188,12 @@ void ProjectileManager::update_projectiles(int(&display)[yPixels][xPixels]) {
     }
 }
 
+ProjectileManager* ProjectileManager::getInstance() {
+    if (!instance) {
+        instance = new ProjectileManager;
+    }
+    return instance;
+}
+
+ProjectileManager* ProjectileManager::instance = (nullptr);
 

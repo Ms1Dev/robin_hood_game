@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="char2Ansi.cpp" />
+    <ClCompile Include="background.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="sprites.cpp" />
   </ItemGroup>

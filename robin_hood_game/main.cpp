@@ -6,14 +6,18 @@
 
 using namespace std;
 
+// create projectile manager singleton
+ProjectileManager* projectileManager = ProjectileManager::getInstance();
 
-ProjectileManager projectileManager;
+// create background singleton
+Background* background = Background::getInstance();
 
-Background background;
+// if height of screen changes keep the units y position relative to bottom of background
+int unitYpos = (*background).get_unit_ypos(36);
 
-Unit unit(10, 44, 2, &projectileManager);
+Unit unit(10, unitYpos, 2);
 
-
+// declare function that updates the system
 void update();
 
 int main()
@@ -33,10 +37,10 @@ int main()
 
 void update() {
     // update the background
-    background.update(display);
+    (*background).update(display);
     
     // update projectiles
-    projectileManager.update_projectiles(display);
+    (*projectileManager).update_projectiles(display);
 
     // update units
     unit.update(display);
@@ -48,13 +52,21 @@ void update() {
     unit.set_state(0);
     // get key input
     if ((GetKeyState(37) & 0x8000) && (unit.get_x() > 0)) {
-        //unit.move_h(true);
-        background.right_scroll(5);
+        if (unit.get_x() > 10) {
+            unit.move_h(true);
+        }
+        else {
+            (*background).right_scroll(2);
+        }
         unit.set_state(1);
     }
     else if ((GetKeyState(39) & 0x8000)) {
-        //unit.move_h();
-        background.left_scroll(5);
+        if (unit.get_x() < xPixels / 2) {
+            unit.move_h();
+        }
+        else {
+            (*background).left_scroll(2);
+        }  
         unit.set_state(1);
     }
     else if ((GetKeyState(40) & 0x8000)) {
