@@ -15,13 +15,18 @@ Background* background = Background::getInstance();
 // if height of screen changes keep the units y position relative to bottom of background
 int unitYpos = (*background).get_unit_ypos(36);
 
-Archer unit(10, unitYpos, 2);
+Player player(10, unitYpos, 2);
+
+Archer* archer = new Archer(50, unitYpos, 2);
+
 
 // declare function that updates the system
 void update();
 
 int main()
 {
+    archer->reverseImage = true;
+        
     // timer object for controlling frame rates and timing operations
     Timer* timer = Timer::getInstance();
     // pass reference to function that is called on every tick
@@ -43,40 +48,46 @@ void update() {
     (*projectileManager).update_projectiles(display);
 
     // update units
-    unit.update(display);
+    player.update(display);
+    
+    // move other archer relative to background
+    // TODO: move into archer class somehow or enemy controller
+    archer->set_xrel(archer->get_x() - background->get_scroll_pos());
+
+    archer->update(display);
 
     // print the display to the console
     draw();
 
-    // set unit state to standing TODO: move to unit class
-    unit.set_state(0);
+    // set player state to standing TODO: move to player class
+    player.set_state(0);
     // get key input
-    if ((GetKeyState(37) & 0x8000) && (unit.get_x() > 0)) {
-        if (unit.get_x() > 10) {
-            unit.move_h(true);
-            unit.reverseImage = true;
+    if ((GetKeyState(37) & 0x8000) && (player.get_x() > 0)) {
+        if (player.get_x() > 10) {
+            player.move_h(true);
+            player.reverseImage = true;
         }
         else {
             (*background).right_scroll(2);
         }
-        unit.set_state(1);
+        player.set_state(1);
     }
     else if ((GetKeyState(39) & 0x8000)) {
-        if (unit.get_x() < xPixels / 2) {
-            unit.move_h();
-            unit.reverseImage = false;
+        if (player.get_x() < xPixels / 2) {
+            player.move_h();
+            player.reverseImage = false;
         }
         else {
             (*background).left_scroll(2);
         }  
-        unit.set_state(1);
+        player.set_state(1);
     }
     else if ((GetKeyState(40) & 0x8000)) {
-        //unit.move_h();
-        unit.set_state(2);
+        //player.move_h();
+        player.set_state(2);
     }
 
     if (GetKeyState(32) & 0x8000) {
-        unit.shoot();
+        player.shoot();
     }
 }

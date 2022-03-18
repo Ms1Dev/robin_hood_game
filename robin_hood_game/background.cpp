@@ -67,6 +67,10 @@ int Background::get_unit_ypos(int heightFromBottom) {
     }
 }
 
+int Background::get_scroll_pos() {
+    return scrollPos;
+}
+
 
 Background::Background() {
     set_dimensions();

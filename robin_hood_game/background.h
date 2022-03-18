@@ -13,6 +13,7 @@ public:
     void right_scroll(int distance);
     void left_scroll(int distance);
     int get_unit_ypos(int heightFromBottom);
+    int get_scroll_pos();
 
 private:
     Background();

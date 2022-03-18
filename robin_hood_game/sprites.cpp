@@ -9,13 +9,15 @@
 
 Sprite::Sprite(int x, int y, int speed, int height, int width, string imageFile) {
     this->x = x;
+    xrel = 0;
     this->y = y;
     this->speed = speed;
     this->height = height;
     this->width = width;
     reverseImage = false;
     folder = "archer/";
-    set_filename(imageFile);
+    filename = imageFile;
+    //set_filename(imageFile);
 }
 
 void Sprite::set_filename(string filename) {
@@ -47,8 +49,6 @@ void Sprite::update(int(&display)[yPixels][xPixels]) {
        
     string fn = "images/" + folder + filename;
 
-    cout << fn;
-
     // load the image from file
     std::ifstream file(fn);
     for (int i = 0; i < height * width; i++) {
@@ -68,12 +68,14 @@ void Sprite::update(int(&display)[yPixels][xPixels]) {
             }
             int dx;
             if (reverseImage) {
-                dx = width - j + x;
+                dx = width - j + xrel + x;
             }
             else {
-                dx = j + x;
+                dx = j + xrel + x;
             }
-            display[dy][dx] = imgData[j + width * i];
+            if (dx < xPixels && dx > 0) {
+                display[dy][dx] = imgData[j + width * i];
+            }   
         }
     }
     delete[] imgData;
@@ -82,11 +84,17 @@ void Sprite::update(int(&display)[yPixels][xPixels]) {
 int Sprite::get_x() {
     return x;
 }
+int Sprite::get_xrel() {
+    return xrel;
+}
 int Sprite::get_y() {
     return y;
 }
 void Sprite::set_x(int x) {
     this->x = x;
+}
+void Sprite::set_xrel(int x) {
+    xrel = x;
 }
 void Sprite::set_y(int y) {
     this->y = y;
@@ -197,7 +205,9 @@ void Archer::shoot() {
 }
 
 
-
+Player::Player(int x, int y, int speed) : Archer(x, y, speed) {
+    folder = "player/";
+}
 
 
 Projectile::Projectile(int x, int y, double speed, bool direction) : Sprite(x, y, speed, 3, 13, "arw.txt") {
