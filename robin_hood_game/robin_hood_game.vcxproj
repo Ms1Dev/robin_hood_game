@@ -154,18 +154,18 @@
     <ClInclude Include="sprites.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="standing.txt" />
-    <Text Include="arrow.txt" />
+    <Text Include="s0a.txt" />
+    <Text Include="arw.txt" />
     <Text Include="bg.txt" />
-    <Text Include="crouch.txt" />
-    <Text Include="crouch_na.txt" />
-    <Text Include="standing_na.txt" />
-    <Text Include="walking_3_na.txt" />
-    <Text Include="walking_2_na.txt" />
-    <Text Include="walking_1_na.txt" />
-    <Text Include="walking_3.txt" />
-    <Text Include="walking_2.txt" />
-    <Text Include="walking_1.txt" />
+    <Text Include="c0a.txt" />
+    <Text Include="c0n.txt" />
+    <Text Include="s0n.txt" />
+    <Text Include="w2n.txt" />
+    <Text Include="w1n.txt" />
+    <Text Include="w0n.txt" />
+    <Text Include="w2a.txt" />
+    <Text Include="w1a.txt" />
+    <Text Include="w0a.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

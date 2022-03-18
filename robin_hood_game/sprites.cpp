@@ -3,7 +3,36 @@
 #include <cmath>
 #include "char2Ansi.h"
 #include "sprites.h"
+#include <string>
 
+
+
+Sprite::Sprite(int x, int y, int speed, int height, int width, string imageFile) {
+    this->x = x;
+    this->y = y;
+    this->speed = speed;
+    this->height = height;
+    this->width = width;
+    animationTicks = 0;
+    reverseImage = false;
+    set_filename(imageFile);
+}
+
+void Sprite::set_filename(string filename) {
+    // sets the initial filename used for sprite image
+    if (filename.length() > 7) {
+        throw "File name too long";
+    }
+    else {
+        for (int i = 0; i < 8; i++) {
+            if (i >= filename.length()) {
+                filename[i] = '\0';
+                continue;
+            }
+            this->filename[i] = filename[i];
+        }
+    }
+}
 
 void Sprite::update(int(&display)[yPixels][xPixels]) {
     
@@ -88,13 +117,23 @@ void Sprite::animate(){}
 
 
 
+Unit::Unit(int x, int y, int speed) :Sprite(x, y, speed, 32, 24, "s0n.txt") {
+    projectileManager = ProjectileManager::getInstance();
+    state = 0;
+    animationIndex = 0;
+    animationSpeed = 5;
+    reloadTime = 50;
+    reloadTicks = 0;
+}
+
 void Unit::shoot() {
     if (((*timer).get_ticks() > reloadTicks + reloadTime) && state != 1) {
         reloadTicks = (*timer).get_ticks();
 
         int arrowOffset = 10 + 5 * state;
         // dynamically create a projectile object
-        Projectile* newProjectile = new Projectile(x + 10, y + arrowOffset, 10);
+        // TODO: rename reverse image
+        Projectile* newProjectile = new Projectile(x + 5, y + arrowOffset, 10, reverseImage);
         // try to add to projectile manager
         try {
             projectileManager->add_projectile(newProjectile);
@@ -109,48 +148,34 @@ void Unit::shoot() {
 }
 
 void Unit::animate() {
+    // TODO comment
+    if ((*timer).get_ticks() > reloadTicks + reloadTime) {
+        filename[2] = 'a';
+    }
+    else {
+        filename[2] = 'n';
+    }
+    // default the animation to 0
+    filename[1] = '0';
+
     switch (state) {
-    case 0:
-        if ((*timer).get_ticks() > reloadTicks + reloadTime) {
-            filename = "standing.txt";
-        }
-        else {
-            filename = "standing_na.txt";
-        }
-        break;
-    case 1:
-        // TODO: needs tidying up
-        if ((*timer).get_ticks() > animationTicks + animationSpeed) {
-            animationTicks = (*timer).get_ticks();
-            if (reverseAnimation) {
-                animationIndex--;
-            }
-            else {
+        case 0:
+            filename[0] = 's';
+            break;
+        case 1:
+            filename[0] = 'w';
+            if ((*timer).get_ticks() > animationTicks + animationSpeed) {
+                animationTicks = (*timer).get_ticks();
                 animationIndex++;
+                if (animationIndex > WALKING_ANIMATIONS - 1) {
+                    animationIndex = 0;
+                }
             }
-            
-            if (animationIndex == WALKING_ANIMATIONS - 1) {
-                reverseAnimation = true;
-            }
-            if (animationIndex == 0) {
-                reverseAnimation = false;
-            }
-            if ((*timer).get_ticks() > reloadTicks + reloadTime) {
-                filename = animation[animationIndex];
-            }
-            else {
-                filename = animation[animationIndex + 3];
-            }
-        }
-        break;
-    case 2:
-        if ((*timer).get_ticks() > reloadTicks + reloadTime) {
-            filename = "crouch.txt";
-        }
-        else {
-            filename = "crouch_na.txt";
-        }
-        break;
+            filename[1] = char(animationIndex + 48);
+            break;
+        case 2:
+            filename[0] = 'c';
+            break;
     }
 }
 
@@ -159,11 +184,24 @@ void Unit::set_state(int state) {
 }
 
 
+Projectile::Projectile(int x, int y, double speed, bool direction) : Sprite(x, y, speed, 3, 13, "arw.txt") {
+    reverseImage = direction;
+    if (reverseImage) {
+        this->x -= 5;
+    }
+}
+
 
 bool Projectile::move() {
     bool stillExists = true;
-    x += speed;
-    if (this->x + width > xPixels) {
+    if (reverseImage) {
+        x -= speed;
+    }
+    else {
+        x += speed;
+    }
+    
+    if (this->x + width > xPixels || x < 0) {
         destroy();
         stillExists = false;
     }
@@ -173,7 +211,6 @@ bool Projectile::move() {
 void Projectile::destroy() {
     delete this;
 }
-
 
 
 

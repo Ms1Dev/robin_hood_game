@@ -52,40 +52,40 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="standing.txt">
+    <Text Include="s0a.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="arrow.txt">
+    <Text Include="arw.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="bg.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="walking_1.txt">
+    <Text Include="w0a.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="walking_2.txt">
+    <Text Include="w1a.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="walking_3.txt">
+    <Text Include="w2a.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="crouch.txt">
+    <Text Include="c0a.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="crouch_na.txt">
+    <Text Include="c0n.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="standing_na.txt">
+    <Text Include="s0n.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="walking_1_na.txt">
+    <Text Include="w0n.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="walking_3_na.txt">
+    <Text Include="w2n.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="walking_2_na.txt">
+    <Text Include="w1n.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

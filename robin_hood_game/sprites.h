@@ -14,22 +14,13 @@ using namespace std;
 
 class Sprite {
 public:
-
-    Sprite(int x, int y, int speed, int height, int width, const char* filename) {
-        this->x = x;
-        this->y = y;
-        this->speed = speed;
-        this->height = height;
-        this->width = width;
-        this->filename = filename;
-        animationTicks = 0;
-        reverseImage = false;
-    }
     int x, y, speed, height, width;
-    const char* filename;
+    char filename[8];
     bool reverseImage;
     Timer* timer = Timer::getInstance();
     unsigned long animationTicks;
+
+    Sprite(int x, int y, int speed, int height, int width, string imageFile);
     void update(int(&display)[yPixels][xPixels]);
     virtual void animate();
     int get_x();
@@ -41,15 +32,14 @@ public:
     int get_speed();
     void move_h(bool left = false);
     void move_v(bool up = false);
-
+    void set_filename(string filename);
 };
-
 
 
 
 class Projectile : public Sprite {
 public:
-    Projectile(int x, int y, double speed) : Sprite(x,y,speed,3,13,"arrow.txt") {}
+    Projectile(int x, int y, double speed, bool direction);
     ~Projectile() {}
     bool move();
     void destroy();
@@ -73,27 +63,14 @@ public:
 
 
 
-
-
 class Unit : public Sprite {
 private:
     ProjectileManager* projectileManager;
     void animate();
     int state, animationIndex, animationSpeed, reloadTime;
-    bool reverseAnimation;
     unsigned long reloadTicks;
-    const char* animation[WALKING_ANIMATIONS + 3] = { "walking_1.txt", "walking_2.txt", "walking_3.txt", "walking_1_na.txt", "walking_2_na.txt", "walking_3_na.txt" };
 public:
-
-    Unit(int x, int y, int speed) :Sprite(x, y, speed, 32, 24, "standing.txt") {
-        projectileManager = ProjectileManager::getInstance();
-        state = 0;
-        animationIndex = 0;
-        animationSpeed = 5;
-        reloadTime = 50;
-        reloadTicks = 0;
-        reverseAnimation = false;
-    }
+    Unit(int x, int y, int speed);
     void shoot();
     void set_state(int state);
 };
