@@ -25,8 +25,8 @@ t t t t t t g G G G G G G t g g g R R t t t t t
 t t t t t t g G G G G G G G t t t t t t t t t t
 t t t t t t g G G g g G G G G t t t t t t t t t
 t t t t t t g G G G g G G G G t t t t t t t t t 
-t t t t g g g g G G G g g R R t t t t t t t t t 
+t t t t y g g g G G G g g R R t t t t t t t t t 
 t t t t y y R R R R t t y y y t t t t t t t t t 
-t t t t N y y y y t t t y y y y t t t t t t t t 
-t t t t t N N N N t t t N N N N t t t t t t t t 
+t t t t N y y y t t t t y y y y t t t t t t t t 
+t t t t t N N N t t t t N N N N t t t t t t t t 
 t t t t t t t t t t t t t t t t t t t t t t t t

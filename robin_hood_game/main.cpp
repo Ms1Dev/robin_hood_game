@@ -54,6 +54,7 @@ void update() {
     if ((GetKeyState(37) & 0x8000) && (unit.get_x() > 0)) {
         if (unit.get_x() > 10) {
             unit.move_h(true);
+            unit.reverseImage = true;
         }
         else {
             (*background).right_scroll(2);
@@ -63,6 +64,7 @@ void update() {
     else if ((GetKeyState(39) & 0x8000)) {
         if (unit.get_x() < xPixels / 2) {
             unit.move_h();
+            unit.reverseImage = false;
         }
         else {
             (*background).left_scroll(2);

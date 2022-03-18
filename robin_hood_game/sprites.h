@@ -9,13 +9,11 @@
 using namespace std;
 
 #define PROJECTILE_MEM_SIZE 10
-#define WALKING_ANIMATIONS 4
+#define WALKING_ANIMATIONS 3
 
 
 class Sprite {
 public:
-    int x, y, speed, height, width;
-    const char* filename;
 
     Sprite(int x, int y, int speed, int height, int width, const char* filename) {
         this->x = x;
@@ -25,7 +23,11 @@ public:
         this->width = width;
         this->filename = filename;
         animationTicks = 0;
+        reverseImage = false;
     }
+    int x, y, speed, height, width;
+    const char* filename;
+    bool reverseImage;
     Timer* timer = Timer::getInstance();
     unsigned long animationTicks;
     void update(int(&display)[yPixels][xPixels]);
@@ -78,8 +80,9 @@ private:
     ProjectileManager* projectileManager;
     void animate();
     int state, animationIndex, animationSpeed, reloadTime;
+    bool reverseAnimation;
     unsigned long reloadTicks;
-    const char* animation[WALKING_ANIMATIONS] = { "walking_1.txt", "walking_2.txt", "walking_3.txt", "walking_4.txt" };
+    const char* animation[WALKING_ANIMATIONS + 3] = { "walking_1.txt", "walking_2.txt", "walking_3.txt", "walking_1_na.txt", "walking_2_na.txt", "walking_3_na.txt" };
 public:
 
     Unit(int x, int y, int speed) :Sprite(x, y, speed, 32, 24, "standing.txt") {
@@ -89,6 +92,7 @@ public:
         animationSpeed = 5;
         reloadTime = 50;
         reloadTicks = 0;
+        reverseAnimation = false;
     }
     void shoot();
     void set_state(int state);

@@ -158,9 +158,11 @@
     <Text Include="arrow.txt" />
     <Text Include="bg.txt" />
     <Text Include="crouch.txt" />
-    <Text Include="crouch_shoot.txt" />
-    <Text Include="standing_shoot.txt" />
-    <Text Include="walking_4.txt" />
+    <Text Include="crouch_na.txt" />
+    <Text Include="standing_na.txt" />
+    <Text Include="walking_3_na.txt" />
+    <Text Include="walking_2_na.txt" />
+    <Text Include="walking_1_na.txt" />
     <Text Include="walking_3.txt" />
     <Text Include="walking_2.txt" />
     <Text Include="walking_1.txt" />

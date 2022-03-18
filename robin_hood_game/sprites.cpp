@@ -24,6 +24,7 @@ void Sprite::update(int(&display)[yPixels][xPixels]) {
     }
     file.close();
 
+
     for (int i = 0; i < height; i++) {
         int dy = i + y;
         for (int j = 0; j < width; j++) {
@@ -31,7 +32,13 @@ void Sprite::update(int(&display)[yPixels][xPixels]) {
             if (imgData[j + width * i] == 9) {
                 continue;
             }
-            int dx = j + x;
+            int dx;
+            if (reverseImage) {
+                dx = width - j + x;
+            }
+            else {
+                dx = j + x;
+            }
             display[dy][dx] = imgData[j + width * i];
         }
     }
@@ -82,7 +89,7 @@ void Sprite::animate(){}
 
 
 void Unit::shoot() {
-    if ((*timer).get_ticks() > reloadTicks + reloadTime) {
+    if (((*timer).get_ticks() > reloadTicks + reloadTime) && state != 1) {
         reloadTicks = (*timer).get_ticks();
 
         int arrowOffset = 10 + 5 * state;
@@ -108,17 +115,32 @@ void Unit::animate() {
             filename = "standing.txt";
         }
         else {
-            filename = "standing_shoot.txt";
+            filename = "standing_na.txt";
         }
         break;
     case 1:
+        // TODO: needs tidying up
         if ((*timer).get_ticks() > animationTicks + animationSpeed) {
             animationTicks = (*timer).get_ticks();
-            animationIndex++;
-            if (animationIndex >= WALKING_ANIMATIONS) {
-                animationIndex = 0;
+            if (reverseAnimation) {
+                animationIndex--;
             }
-            filename = animation[animationIndex];
+            else {
+                animationIndex++;
+            }
+            
+            if (animationIndex == WALKING_ANIMATIONS - 1) {
+                reverseAnimation = true;
+            }
+            if (animationIndex == 0) {
+                reverseAnimation = false;
+            }
+            if ((*timer).get_ticks() > reloadTicks + reloadTime) {
+                filename = animation[animationIndex];
+            }
+            else {
+                filename = animation[animationIndex + 3];
+            }
         }
         break;
     case 2:
@@ -126,7 +148,7 @@ void Unit::animate() {
             filename = "crouch.txt";
         }
         else {
-            filename = "crouch_shoot.txt";
+            filename = "crouch_na.txt";
         }
         break;
     }
