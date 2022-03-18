@@ -154,18 +154,18 @@
     <ClInclude Include="sprites.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="s0a.txt" />
-    <Text Include="arw.txt" />
-    <Text Include="bg.txt" />
-    <Text Include="c0a.txt" />
-    <Text Include="c0n.txt" />
-    <Text Include="s0n.txt" />
-    <Text Include="w2n.txt" />
-    <Text Include="w1n.txt" />
-    <Text Include="w0n.txt" />
-    <Text Include="w2a.txt" />
-    <Text Include="w1a.txt" />
-    <Text Include="w0a.txt" />
+    <Text Include="images\archer\s0a.txt" />
+    <Text Include="images\arrow\arw.txt" />
+    <Text Include="images\bg.txt" />
+    <Text Include="images\archer\c0a.txt" />
+    <Text Include="images\archer\c0n.txt" />
+    <Text Include="images\archer\s0n.txt" />
+    <Text Include="images\archer\w2n.txt" />
+    <Text Include="images\archer\w1n.txt" />
+    <Text Include="images\archer\w0n.txt" />
+    <Text Include="images\archer\w2a.txt" />
+    <Text Include="images\archer\w1a.txt" />
+    <Text Include="images\archer\w0a.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

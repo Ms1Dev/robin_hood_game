@@ -15,7 +15,7 @@ Background* background = Background::getInstance();
 // if height of screen changes keep the units y position relative to bottom of background
 int unitYpos = (*background).get_unit_ypos(36);
 
-Unit unit(10, unitYpos, 2);
+Archer unit(10, unitYpos, 2);
 
 // declare function that updates the system
 void update();

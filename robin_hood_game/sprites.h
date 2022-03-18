@@ -15,10 +15,11 @@ using namespace std;
 class Sprite {
 public:
     int x, y, speed, height, width;
-    char filename[8];
+    
     bool reverseImage;
+    char filename[8];
+    string folder;
     Timer* timer = Timer::getInstance();
-    unsigned long animationTicks;
 
     Sprite(int x, int y, int speed, int height, int width, string imageFile);
     void update(int(&display)[yPixels][xPixels]);
@@ -64,14 +65,28 @@ public:
 
 
 class Unit : public Sprite {
-private:
-    ProjectileManager* projectileManager;
-    void animate();
-    int state, animationIndex, animationSpeed, reloadTime;
-    unsigned long reloadTicks;
+protected:
+    //ProjectileManager* projectileManager;
+    
+    int state, animationIndex, animationSpeed;
+    unsigned long animationTicks;
 public:
     Unit(int x, int y, int speed);
-    void shoot();
+    //void shoot();
     void set_state(int state);
 };
+
+
+
+class Archer : public Unit {
+private:
+    ProjectileManager* projectileManager;
+    int reloadTime;
+    unsigned long reloadTicks;
+    void animate();
+public:
+    Archer(int x, int y, int speed);
+    void shoot();
+};
+
 

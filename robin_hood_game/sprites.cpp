@@ -13,14 +13,15 @@ Sprite::Sprite(int x, int y, int speed, int height, int width, string imageFile)
     this->speed = speed;
     this->height = height;
     this->width = width;
-    animationTicks = 0;
     reverseImage = false;
+    folder = "archer/";
     set_filename(imageFile);
 }
 
 void Sprite::set_filename(string filename) {
     // sets the initial filename used for sprite image
     if (filename.length() > 7) {
+        // TODO sort this out
         throw "File name too long";
     }
     else {
@@ -43,9 +44,13 @@ void Sprite::update(int(&display)[yPixels][xPixels]) {
 
     // allocate memory to put background image
     int* imgData = new int[memSize];
+       
+    string fn = "images/" + folder + filename;
+
+    cout << fn;
 
     // load the image from file
-    std::ifstream file(filename);
+    std::ifstream file(fn);
     for (int i = 0; i < height * width; i++) {
         char pixel;
         file >> pixel;
@@ -118,36 +123,19 @@ void Sprite::animate(){}
 
 
 Unit::Unit(int x, int y, int speed) :Sprite(x, y, speed, 32, 24, "s0n.txt") {
-    projectileManager = ProjectileManager::getInstance();
     state = 0;
     animationIndex = 0;
     animationSpeed = 5;
-    reloadTime = 50;
-    reloadTicks = 0;
+    animationTicks = 0;
 }
 
-void Unit::shoot() {
-    if (((*timer).get_ticks() > reloadTicks + reloadTime) && state != 1) {
-        reloadTicks = (*timer).get_ticks();
 
-        int arrowOffset = 10 + 5 * state;
-        // dynamically create a projectile object
-        // TODO: rename reverse image
-        Projectile* newProjectile = new Projectile(x + 5, y + arrowOffset, 10, reverseImage);
-        // try to add to projectile manager
-        try {
-            projectileManager->add_projectile(newProjectile);
-        }
-        catch (std::exception e) {
-            // projectile manager with throw an exception if the array of projectiles is full
-            std::cout << e.what();
-            // it could not be added to array so delete from memory
-            delete newProjectile;
-        }
-    }
+void Unit::set_state(int state) {
+    this->state = state;
 }
 
-void Unit::animate() {
+
+void Archer::animate() {
     // TODO comment
     if ((*timer).get_ticks() > reloadTicks + reloadTime) {
         filename[2] = 'a';
@@ -179,13 +167,42 @@ void Unit::animate() {
     }
 }
 
-void Unit::set_state(int state) {
-    this->state = state;
+Archer::Archer(int x, int y, int speed) : Unit(x, y, speed) {
+    projectileManager = ProjectileManager::getInstance();
+    reloadTime = 50;
+    reloadTicks = 0;
+    folder = "archer/";
 }
+
+
+void Archer::shoot() {
+    if (((*timer).get_ticks() > reloadTicks + reloadTime) && state != 1) {
+        reloadTicks = (*timer).get_ticks();
+
+        int arrowOffset = 10 + 5 * state;
+        // dynamically create a projectile object
+        // TODO: rename reverse image
+        Projectile* newProjectile = new Projectile(x + 10, y + arrowOffset, 10, reverseImage);
+        // try to add to projectile manager
+        try {
+            projectileManager->add_projectile(newProjectile);
+        }
+        catch (std::exception e) {
+            // projectile manager with throw an exception if the array of projectiles is full
+            std::cout << e.what();
+            // it could not be added to array so delete from memory
+            delete newProjectile;
+        }
+    }
+}
+
+
+
 
 
 Projectile::Projectile(int x, int y, double speed, bool direction) : Sprite(x, y, speed, 3, 13, "arw.txt") {
     reverseImage = direction;
+    folder = "arrow/";
     if (reverseImage) {
         this->x -= 5;
     }

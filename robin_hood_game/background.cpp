@@ -17,7 +17,7 @@ void Background::update(int(&display)[yPixels][xPixels]) {
     int* bgData = new int[memSize] {};
 
     // load the image from file
-    std::ifstream file("bg.txt");
+    std::ifstream file("images/bg.txt");
 
     int heightDiff = dimensions.height - yPixels;
     int ignorePixels = heightDiff * dimensions.width;
@@ -75,7 +75,7 @@ Background::Background() {
 
 void Background::set_dimensions() {
     // load the image from file
-    std::ifstream file("bg.txt");
+    std::ifstream file("images/bg.txt");
 
     int nlPos = 0;
     int noOfPixels = 0;
