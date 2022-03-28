@@ -65,15 +65,15 @@ void Archer_controller::command_update() {
         state = 0;
     }
 
-    //switch (state) {
-    //case 1:
-    //    thisUnit->walk(true);
-    //    break;
-    //case 2:
-    //    thisUnit->walk();
-    //    break;
-    //default:
-    //    thisUnit->stop(true);
-    //    break;
-    //}
+    switch (state) {
+    case 1:
+        thisUnit->walk(true);
+        break;
+    case 2:
+        thisUnit->walk();
+        break;
+    default:
+        thisUnit->stop(true);
+        break;
+    }
 }
