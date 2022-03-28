@@ -2,7 +2,10 @@
 #include "display.h"
 #include "timer.h"
 #include "background.h"
-#include "sprites.h"
+#include "projectileManager.h"
+#include "archer.h"
+#include "controller.h"
+
 
 using namespace std;
 
@@ -12,13 +15,18 @@ ProjectileManager* projectileManager = ProjectileManager::getInstance();
 // create background singleton
 Background* background = Background::getInstance();
 
+Collision_detector* collision_detector = Collision_detector::getInstance();
+
 // if height of screen changes keep the units y position relative to bottom of background
 int unitYpos = (*background).get_unit_ypos(36);
 
-Player player(10, unitYpos, 2);
+Archer player(10, unitYpos, 2, true);
 
-Archer* archer = new Archer(50, unitYpos, 2);
+Controller human(&player);
 
+Archer* archer = new Archer(50, unitYpos, 1, false);
+
+Archer_controller comp(archer, &player);
 
 // declare function that updates the system
 void update();
@@ -47,6 +55,12 @@ void update() {
     // update projectiles
     (*projectileManager).update_projectiles(display);
 
+    human.command_update();
+
+    comp.command_update();
+
+    collision_detector->detectCollisions();
+
     // update units
     player.update(display);
     
@@ -58,36 +72,4 @@ void update() {
 
     // print the display to the console
     draw();
-
-    // set player state to standing TODO: move to player class
-    player.set_state(0);
-    // get key input
-    if ((GetKeyState(37) & 0x8000) && (player.get_x() > 0)) {
-        if (player.get_x() > 10) {
-            player.move_h(true);
-            player.reverseImage = true;
-        }
-        else {
-            (*background).right_scroll(2);
-        }
-        player.set_state(1);
-    }
-    else if ((GetKeyState(39) & 0x8000)) {
-        if (player.get_x() < xPixels / 2) {
-            player.move_h();
-            player.reverseImage = false;
-        }
-        else {
-            (*background).left_scroll(2);
-        }  
-        player.set_state(1);
-    }
-    else if ((GetKeyState(40) & 0x8000)) {
-        //player.move_h();
-        player.set_state(2);
-    }
-
-    if (GetKeyState(32) & 0x8000) {
-        player.shoot();
-    }
 }
