@@ -18,7 +18,7 @@ void Controller::command_update() {
         }
     }
     else if ((GetKeyState(39) & 0x8000)) {
-        if (player->get_x() < xPixels / 2) {
+        if (player->get_x() < xPixels / 2 - 20) {
             player->walk();
         }
         else {

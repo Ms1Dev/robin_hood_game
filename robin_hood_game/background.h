@@ -1,7 +1,6 @@
 #pragma once
 
 #include <fstream>
-#include "char2Ansi.h"
 #include "config.h"
 
 

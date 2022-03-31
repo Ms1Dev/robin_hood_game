@@ -1,5 +1,5 @@
 #include "background.h"
-
+#include "char2Ansi.h"
 
 
 Background* Background::getInstance() {

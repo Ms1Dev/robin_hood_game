@@ -3,10 +3,14 @@
 #include <string>
 #include "config.h"
 #include "timer.h"
-#include "background.h"
 #include "collision_detector.h"
 
 using namespace std;
+
+
+/*
+This is the base class for all moving objects
+*/
 
 class Sprite {
 private:
@@ -16,7 +20,6 @@ protected:
     string filename;
     string folder;
     Timer* timer = Timer::getInstance();
-    Background* background = Background::getInstance();
     Collision_detector* collision_detector = Collision_detector::getInstance();
     bool human;
 public:

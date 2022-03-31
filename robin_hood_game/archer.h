@@ -5,7 +5,7 @@
 
 
 class Archer : public Unit {
-protected:
+private:
     ProjectileManager* projectileManager;
     int reloadTime;
     unsigned long reloadTicks;

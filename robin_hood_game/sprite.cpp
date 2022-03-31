@@ -1,5 +1,6 @@
 #include "sprite.h"
-
+#include <fstream>
+#include "char2Ansi.h"
 
 
 

@@ -13,11 +13,11 @@ private:
     std::chrono::duration<float> deltaTime;
     unsigned long ticks;
     float fps;
+    static Timer* instance;
     void reset();
     float delta_time();
     void (*onTickFunc)();
-    static Timer* instance;
-
+    
 public:
     static Timer *getInstance();
     void run();
