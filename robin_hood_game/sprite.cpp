@@ -5,6 +5,7 @@
 
 
 Sprite::Sprite(int x, int y, int speed, int height, int width, string imageFile) {
+    isAlive = true;
     this->x = x;
     xrel = 0;
     this->y = y;
@@ -20,7 +21,7 @@ Sprite::Sprite(int x, int y, int speed, int height, int width, string imageFile)
 }
 
 
-void Sprite::update(int(&display)[yPixels][xPixels]) {
+bool Sprite::update(int(&display)[yPixels][xPixels]) {
 
     // call the child class overriden animation method
     animate();
@@ -62,6 +63,8 @@ void Sprite::update(int(&display)[yPixels][xPixels]) {
         }
     }
     delete[] imgData;
+
+    return isAlive;
 }
 
 int Sprite::get_x() {

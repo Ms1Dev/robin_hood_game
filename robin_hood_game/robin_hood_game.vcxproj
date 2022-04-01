@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="archer.cpp" />
     <ClCompile Include="collision_detector.cpp" />
+    <ClCompile Include="computer.cpp" />
     <ClCompile Include="controller.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="char2Ansi.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="archer.h" />
     <ClInclude Include="collision_detector.h" />
+    <ClInclude Include="computer.h" />
     <ClInclude Include="controller.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="config.h" />

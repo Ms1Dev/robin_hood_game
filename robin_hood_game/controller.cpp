@@ -7,7 +7,8 @@ Controller::Controller(Archer* player) {
 
 void Controller::command_update() {
     player->set_state(0);
-    // get key input
+    
+    // left arrow key pressed
     if ((GetKeyState(37) & 0x8000) && (player->get_x() > 0)) {
         if (player->get_x() > 10) {
             player->walk(true);
@@ -17,6 +18,7 @@ void Controller::command_update() {
             player->set_state(1);
         }
     }
+    // right arrow key
     else if ((GetKeyState(39) & 0x8000)) {
         if (player->get_x() < xPixels / 2 - 20) {
             player->walk();
@@ -26,10 +28,11 @@ void Controller::command_update() {
             player->set_state(1);
         }
     }
+    // down arrow key
     else if ((GetKeyState(40) & 0x8000)) {
         player->set_state(2);
     }
-
+    // space bar
     if (GetKeyState(32) & 0x8000 && player->get_state() != 2) {
         player->shoot();
     }

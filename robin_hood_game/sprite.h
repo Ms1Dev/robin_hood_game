@@ -15,6 +15,7 @@ This is the base class for all moving objects
 class Sprite {
 private:
     friend class Collision_detector;
+    bool isAlive;
 protected:
     int x, y, speed, height, width, xrel, collisionMarginX, collisionMarginY;
     string filename;
@@ -25,7 +26,7 @@ protected:
 public:
     bool reverseImage;
     Sprite(int x, int y, int speed, int height, int width, string imageFile);
-    void update(int(&display)[yPixels][xPixels]);
+    bool update(int(&display)[yPixels][xPixels]);
     virtual void animate();
     int get_x();
     int get_y();

@@ -5,6 +5,7 @@
 #include "projectileManager.h"
 #include "archer.h"
 #include "controller.h"
+#include "computer.h"
 
 
 using namespace std;
@@ -24,16 +25,23 @@ Archer player(10, unitYpos, 2, true);
 
 Controller human(&player);
 
-Archer* archer = new Archer(50, unitYpos, 1, false);
+Computer computer(&player, unitYpos);
 
-Archer_controller comp(archer, &player);
+
+
+
+//Archer* archer = new Archer(50, unitYpos, 1, false);
+//
+//Archer_controller comp(archer, &player);
 
 // declare function that updates the system
 void update();
 
 int main()
 {
-    archer->reverseImage = true;
+    computer.newInstance();
+
+    //archer->reverseImage = true;
         
     // timer object for controlling frame rates and timing operations
     Timer* timer = Timer::getInstance();
@@ -57,7 +65,8 @@ void update() {
 
     human.command_update();
 
-    comp.command_update();
+    //comp.command_update();
+    computer.update(display);
 
     collision_detector->detectCollisions();
 
@@ -66,9 +75,9 @@ void update() {
     
     // move other archer relative to background
     // TODO: move into archer class somehow or enemy controller
-    archer->set_xrel(archer->get_x() - background->get_scroll_pos());
+    //archer->set_xrel(archer->get_x() - background->get_scroll_pos());
 
-    archer->update(display);
+    //archer->update(display);
 
     // print the display to the console
     draw();
