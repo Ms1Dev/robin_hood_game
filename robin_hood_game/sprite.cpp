@@ -3,7 +3,6 @@
 #include "char2Ansi.h"
 
 
-
 Sprite::Sprite(int x, int y, int speed, int height, int width, string imageFile) {
     isAlive = true;
     this->x = x;
@@ -22,6 +21,11 @@ Sprite::Sprite(int x, int y, int speed, int height, int width, string imageFile)
 
 
 bool Sprite::update(int(&display)[yPixels][xPixels]) {
+
+    // non human then x position is relative
+    if (!human) {
+        set_xrel(x - background->get_scroll_pos());
+    }
 
     // call the child class overriden animation method
     animate();
@@ -117,3 +121,11 @@ void Sprite::move_v(bool up) {
 // to be overwritten by child classes 
 void Sprite::animate() {}
 
+
+void Sprite::kill() {
+    isAlive = false;
+}
+
+Sprite::~Sprite() {
+    collision_detector->removeSprite(this);
+}

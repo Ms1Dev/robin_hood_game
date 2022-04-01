@@ -28,20 +28,13 @@ Controller human(&player);
 Computer computer(&player, unitYpos);
 
 
-
-
-//Archer* archer = new Archer(50, unitYpos, 1, false);
-//
-//Archer_controller comp(archer, &player);
-
 // declare function that updates the system
 void update();
 
 int main()
 {
+  
     computer.newInstance();
-
-    //archer->reverseImage = true;
         
     // timer object for controlling frame rates and timing operations
     Timer* timer = Timer::getInstance();
@@ -57,27 +50,23 @@ int main()
 
 
 void update() {
-    // update the background
+    // update the background image
     (*background).update(display);
     
     // update projectiles
     (*projectileManager).update_projectiles(display);
 
+    // read inputs from key presses
     human.command_update();
 
-    //comp.command_update();
+    // update player images
+    player.update(display);
+
+    // update all computer controlled units
     computer.update(display);
 
+    // detect collisions between sprites
     collision_detector->detectCollisions();
-
-    // update units
-    player.update(display);
-    
-    // move other archer relative to background
-    // TODO: move into archer class somehow or enemy controller
-    //archer->set_xrel(archer->get_x() - background->get_scroll_pos());
-
-    //archer->update(display);
 
     // print the display to the console
     draw();

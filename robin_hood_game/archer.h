@@ -13,6 +13,7 @@ private:
 
 public:
     Archer(int x, int y, int speed, bool human);
+    ~Archer();
     void shoot();
 };
 

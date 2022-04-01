@@ -10,6 +10,7 @@ public:
 	static Collision_detector* getInstance();
 	void detectCollisions();
 	void addSprite(Sprite* sprite);
+	void removeSprite(Sprite* sprite);
 private:
 	static Collision_detector* instance;
 	Collision_detector();

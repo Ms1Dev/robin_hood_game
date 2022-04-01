@@ -14,5 +14,6 @@ public:
     int get_state();
     void walk(bool left = false);
     void stop(bool left = false);
+    void kill();
 };
 

@@ -169,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="images\archer\s0a.txt" />
+    <Text Include="images\archer\s0d.txt" />
     <Text Include="images\arrow\arw.txt" />
     <Text Include="images\bg.txt" />
     <Text Include="images\archer\c0a.txt" />

@@ -20,12 +20,26 @@ void Collision_detector::addSprite(Sprite* sprite) {
     sprites.push_back(sprite);
 }
 
+void Collision_detector::removeSprite(Sprite* sprite) {
+
+    vector<Sprite*>::iterator iterator;
+
+    for (iterator = sprites.begin(); iterator != sprites.end(); ++iterator) {
+       if (*iterator == sprite) {
+            sprites.erase(iterator);
+            break;
+       }
+    }
+}
+
 
 void Collision_detector::detectCollisions() {
     for (int i = 0; i < sprites.size(); i++) {
         for (int j = 1 + i; j < sprites.size(); j++) {
             if (collide(sprites[i], sprites[j])) {
-                std::cout << "COLLISION";
+                // TODO 
+                sprites[i]->kill();
+                sprites[j]->kill();
             }
         }
     }

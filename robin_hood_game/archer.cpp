@@ -6,11 +6,13 @@
 
 void Archer::animate() {
     // TODO comment
-    if ((*timer).get_ticks() > reloadTicks + reloadTime) {
-        filename[2] = 'a';
-    }
-    else {
-        filename[2] = 'n';
+    if (state != 3) {
+        if ((*timer).get_ticks() > reloadTicks + reloadTime) {
+            filename[2] = 'a';
+        }
+        else {
+            filename[2] = 'n';
+        }
     }
     // default the animation to 0
     filename[1] = '0';
@@ -28,10 +30,27 @@ void Archer::animate() {
                 animationIndex = 0;
             }
         }
+        // current index + 48 to equal ascii character for that number
         filename[1] = char(animationIndex + 48);
         break;
     case 2:
         filename[0] = 'c';
+        break;
+    case 3:
+        filename[0] = 's';
+        if ((*timer).get_ticks() > animationTicks + animationSpeed) {
+            animationTicks = (*timer).get_ticks();
+            if (filename[2] == 'd') {
+                filename[2] = 'n';
+            }
+            else {
+                filename[2] = 'd';
+                animationIndex++;
+            }
+            if (animationIndex == 3) {
+                isAlive = false;
+            }
+        }
         break;
     }
 }
@@ -70,4 +89,10 @@ void Archer::shoot() {
             delete newProjectile;
         }
     }
+}
+
+
+
+Archer::~Archer() {
+
 }

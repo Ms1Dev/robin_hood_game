@@ -14,7 +14,7 @@ private:
 		Archer_controller* controller;
 	};
 	int unitYpos;
-	std::list<Archer_Instance*> archerUnits();
+	std::list<Archer_Instance> archerUnits;
 public:
 	Computer(Archer* player, int unitYpos);
 	void update(int(&display)[yPixels][xPixels]);

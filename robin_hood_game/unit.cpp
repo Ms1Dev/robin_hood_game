@@ -5,7 +5,7 @@ Unit::Unit(int x, int y, int speed) :Sprite(x, y, speed, 32, 24, "s0n.txt") {
     state = 0;
     animationIndex = 0;
     animationSpeed = 5;
-    animationTicks = 0;
+    animationIndex = 0;
 }
 
 
@@ -31,4 +31,14 @@ void Unit::set_state(int state) {
 
 int Unit::get_state() {
     return state;
+}
+
+
+void Unit::kill() {
+    // if statement to prevent restarting animation if new collision
+    if (state != 3) {
+        state = 3;
+        animationIndex = 0;
+        animationTicks = 0;
+    }
 }

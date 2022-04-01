@@ -6,6 +6,11 @@ Controller::Controller(Archer* player) {
 }
 
 void Controller::command_update() {
+    // if player is dead do not continue
+    if (player->get_state() == 3) {
+        return;
+    }
+
     player->set_state(0);
     
     // left arrow key pressed
@@ -52,6 +57,11 @@ Archer_controller::Archer_controller(Archer* archer, Archer* player) : Controlle
 
 
 void Archer_controller::command_update() {
+    // if unit is dead do not continue
+    if (thisUnit->get_state() == 3) {
+        return;
+    }
+
     int distanceToPlayer = thisUnit->get_xTotal() - player->get_x();
     int midDistance = retreatDistance + ((attackDistance - retreatDistance) / 2);
     

@@ -13,24 +13,36 @@ Computer::Computer(Archer* player, int unitYpos) {
 
 void Computer::newInstance() {
 	Archer* newArcher = new Archer(50, unitYpos, 1, false);
-	Archer_controller* controller = new Archer_controller(player, newArcher);
+	Archer_controller* controller = new Archer_controller(newArcher, player);
 
 	Archer_Instance instance{
 		newArcher,
 		controller
 	};
 
-	archerUnits.push_back(&instance);
+	archerUnits.push_back(instance);
 }
 
 
 void Computer::update(int(&display)[yPixels][xPixels]) {
 
-	std::list<Archer_Instance>::iterator iterator;
+	// create an iterator for the while loop
+	std::list<Archer_Instance>::iterator iterator = archerUnits.begin();
 
-	/*for( iterator = archerUnits.begin(); iterator != archerUnits.end(); ++iterator){
+
+	while (iterator != archerUnits.end()) {
+
 		iterator->controller->command_update();
-		iterator->archer->update(display);
-	}*/
+
+		// if update returns false (archer is not alive) then delete
+		if (!iterator->archer->update(display)) {
+			delete iterator->controller;
+			delete iterator->archer;
+			archerUnits.erase(iterator++);
+		}
+		else {
+			iterator++;
+		}
+	}
 
 }
