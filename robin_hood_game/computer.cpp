@@ -1,5 +1,4 @@
 #include "computer.h"
-
 #include "archer.h"
 #include "controller.h"
 

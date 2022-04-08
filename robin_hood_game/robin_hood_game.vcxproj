@@ -148,6 +148,7 @@
     <ClCompile Include="background.cpp" />
     <ClCompile Include="projectile.cpp" />
     <ClCompile Include="projectileManager.cpp" />
+    <ClCompile Include="display.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="unit.cpp" />
