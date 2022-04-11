@@ -17,7 +17,7 @@ class Sprite {
 private:
     friend class Collision_detector;
 protected:
-    bool isAlive;
+    bool isAlive, doesCollide;
     int x, y, speed, height, width, xrel, collisionMarginX, collisionMarginY;
     string filename;
     string folder;
@@ -36,6 +36,7 @@ public:
     int get_y();
     void set_x(int x);
     void set_xrel(int x);
+    int get_xCombined();
     int get_xrel();
     void set_y(int y);
     int get_height();

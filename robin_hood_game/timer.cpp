@@ -16,13 +16,18 @@ Timer *Timer::getInstance() {
     return instance;
 }
 
-void Timer::run() {
+Timer::~Timer() {
+}
+
+bool Timer::run() {
     deltaTime = std::chrono::system_clock::now() - startTime;
+    bool run = true;
     if (delta_time() >= 1 / fps) {
         reset();
         ticks++;
-        onTickFunc();
+        run = onTickFunc();
     }
+    return run;
 }
 unsigned long Timer::get_ticks() {
     return ticks;
@@ -35,7 +40,7 @@ float Timer::delta_time() {
     return deltaTime.count();
 }
 
-void Timer::on_tick(void (*method)()) {
+void Timer::on_tick(bool (*method)()) {
     onTickFunc = method;
 }
 

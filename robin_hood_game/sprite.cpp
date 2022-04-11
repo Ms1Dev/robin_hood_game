@@ -5,6 +5,7 @@
 
 Sprite::Sprite(int x, int y, int speed, int height, int width, string imageFile) {
     isAlive = true;
+    doesCollide = true;
     this->x = x;
     xrel = 0;
     this->y = y;
@@ -77,6 +78,9 @@ int Sprite::get_x() {
 int Sprite::get_xrel() {
     return xrel;
 }
+int Sprite::get_xCombined() {
+    return x + background->get_scroll_pos();
+}
 int Sprite::get_xTotal() {
     return xrel + x;
 }
@@ -103,10 +107,10 @@ int Sprite::get_speed() {
 }
 void Sprite::move_h(bool left) {
     if (left) {
-        x -= speed;
+        x -= speed + (speed * human);
     }
     else {
-        x += speed;
+        x += speed + (speed * human);
     }
 }
 void Sprite::move_v(bool up) {
@@ -123,6 +127,7 @@ void Sprite::animate() {}
 
 
 void Sprite::kill() {
+    doesCollide = false;
     isAlive = false;
 }
 

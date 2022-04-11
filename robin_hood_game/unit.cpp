@@ -8,10 +8,15 @@ Unit::Unit(int x, int y, int speed) :Sprite(x, y, speed, 32, 24, "s0n.txt") {
     animationIndex = 0;
 }
 
-
-void Unit::shoot() {
+bool Unit::update(int(&display)[yPixels][xPixels]) {
+    if (state == 2) {
+        collisionMarginY = 15;
+    }
+    else {
+        collisionMarginY = 0;
+    }
+    return __super::update(display);
 }
-
 
 void Unit::walk(bool left) {
     move_h(left);
@@ -41,4 +46,5 @@ void Unit::kill() {
         animationIndex = 0;
         animationTicks = 0;
     }
+    doesCollide = false;
 }

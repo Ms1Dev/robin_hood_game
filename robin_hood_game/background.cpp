@@ -9,6 +9,9 @@ Background* Background::getInstance() {
     return instance;
 }
 
+Background::~Background() {
+}
+
 void Background::update(int(&display)[yPixels][xPixels]) {
 
     int memSize = yPixels * xPixels;

@@ -8,6 +8,7 @@
 class Background {
 public:
     static Background* getInstance();
+    ~Background();
     void update(int(&display)[yPixels][xPixels]);
     void right_scroll(int distance);
     void left_scroll(int distance);

@@ -77,7 +77,7 @@ void Archer::shoot() {
         int arrowOffset = 10 + 5 * state;
         // dynamically create a projectile object
         // TODO: rename reverse image
-        Projectile* newProjectile = new Projectile(x + 10, y + arrowOffset, 10, reverseImage, human);
+        Projectile* newProjectile = new Projectile(x + 10, y + arrowOffset, 5, reverseImage, human);
         // try to add to projectile manager
         try {
             projectileManager->add_projectile(newProjectile);

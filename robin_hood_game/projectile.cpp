@@ -16,19 +16,15 @@ Projectile::Projectile(int x, int y, double speed, bool direction, bool human) :
 bool Projectile::move() {
     bool stillExists = true;
     if (reverseImage) {
-        x -= speed;
+        move_h(true);
     }
     else {
-        x += speed;
+        move_h();
     }
 
     if (this->x + width > xPixels || x < 0) {
-        destroy();
         stillExists = false;
     }
     return stillExists;
 }
 
-void Projectile::destroy() {
-    delete this;
-}

@@ -7,6 +7,7 @@ class Sprite;
 
 class Collision_detector {
 public:
+	~Collision_detector();
 	static Collision_detector* getInstance();
 	void detectCollisions();
 	void addSprite(Sprite* sprite);
@@ -23,7 +24,7 @@ private:
 		bool isColliding(Collision_rect* rect);
 	private:
 		int x1, y1, x2, y2;
-		bool isHuman;
+		bool isHuman, doesCollide;
 	};
 };
 

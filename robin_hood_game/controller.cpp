@@ -1,4 +1,5 @@
 #include "controller.h"
+#include <time.h>
 
 
 Controller::Controller(Archer* player) {
@@ -48,12 +49,14 @@ void Controller::command_update() {
 
 Archer_controller::Archer_controller(Archer* archer, Archer* player) : Controller::Controller(player) {
 	thisUnit = archer;
-    retreatDistance = 60;
-    attackDistance = 110;
+    // generate random attack and retreat distances so units dont stack on top of eachother
+    retreatDistance = rand() % 40 + 30;
+    attackDistance = rand() % 40 + 90;
     // state: 0 = standing, 1 = walk left, 2 = walk right
     state = 0;
-}
 
+    shootDelay = rand() % 30 + 30;
+}
 
 
 void Archer_controller::command_update() {
@@ -61,23 +64,27 @@ void Archer_controller::command_update() {
     if (thisUnit->get_state() == 3) {
         return;
     }
-
+    // calculate distances from player
     int distanceToPlayer = thisUnit->get_xTotal() - player->get_x();
     int midDistance = retreatDistance + ((attackDistance - retreatDistance) / 2);
-    
+    // if player is closer than retreat distance then walk right
     if (state == 0 && distanceToPlayer < retreatDistance) {
         state = 2;
     }
+    // if player is further than attack distance then walk left
     if (state == 0 && distanceToPlayer > attackDistance) {
         state = 1;
     }
+    // if walking right stop midway between attack and retreat distances
     if (state == 2 && distanceToPlayer > midDistance) {
         state = 0;
     }
+    // same as above but walking left
     if (state == 1 && distanceToPlayer < midDistance) {
         state = 0;
     }
 
+    // convert state into action
     switch (state) {
     case 1:
         thisUnit->walk(true);
@@ -88,5 +95,11 @@ void Archer_controller::command_update() {
     default:
         thisUnit->stop(true);
         break;
+    }
+
+    if (shootTicks + shootDelay < timer->get_ticks()) {
+        shootTicks = timer->get_ticks();
+        shootDelay = rand() % 30 + 30;
+        thisUnit->shoot();
     }
 }

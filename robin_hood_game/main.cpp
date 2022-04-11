@@ -21,19 +21,20 @@ Collision_detector* collision_detector = Collision_detector::getInstance();
 // if height of screen changes keep the units y position relative to bottom of background
 int unitYpos = (*background).get_unit_ypos(36);
 
-Archer player(10, unitYpos, 2, true);
+Archer player(10, unitYpos, 1, true);
 
 Controller human(&player);
 
 Computer computer(&player, unitYpos);
 
-
 // declare function that updates the system
-void update();
+bool update();
 
 int main()
 {
-  
+    // set the random seed used in other files
+    srand(time(0));
+
     computer.newInstance();
         
     // timer object for controlling frame rates and timing operations
@@ -43,13 +44,22 @@ int main()
     // uses windows.h to apply settings to console window for better gameplay
     configure_console();
     // game loop
-    while (true) {
-        (*timer).run();
+
+
+
+
+    bool run = true;
+
+    while (run) {
+        run = (*timer).run();
     }
+
+  
+    return 0;
 }
 
 
-void update() {
+bool update() {
     // update the background image
     (*background).update(display);
     
@@ -60,7 +70,7 @@ void update() {
     human.command_update();
 
     // update player images
-    player.update(display);
+    bool run = player.update(display);
 
     // update all computer controlled units
     computer.update(display);
@@ -70,4 +80,6 @@ void update() {
 
     // print the display to the console
     draw();
+
+    return run;
 }

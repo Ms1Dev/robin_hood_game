@@ -12,7 +12,7 @@ private:
     ProjectileManager() {}
     static ProjectileManager* instance;
 public:
-
+    ~ProjectileManager();
     static ProjectileManager* getInstance();
     void add_projectile(Projectile* projectile);
     void update_projectiles(int(&display)[yPixels][xPixels]);
