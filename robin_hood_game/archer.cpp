@@ -71,7 +71,8 @@ Archer::Archer(int x, int y, int speed, bool human) : Unit(x, y, speed) {
 
 
 void Archer::shoot() {
-    if (((*timer).get_ticks() > reloadTicks + reloadTime) && state != 1) {
+
+    if (((*timer).get_ticks() > reloadTicks + reloadTime) && state != 1 && x + xrel > 0 && x + xrel < xPixels) {
         reloadTicks = (*timer).get_ticks();
 
         int arrowOffset = 10 + 5 * state;

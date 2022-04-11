@@ -2,6 +2,7 @@
 
 
 
+ProjectileManager* ProjectileManager::instance = (nullptr);
 
 void ProjectileManager::add_projectile(Projectile* projectile) {
     bool hasSpace = false;
@@ -25,7 +26,7 @@ void ProjectileManager::update_projectiles(int(&display)[yPixels][xPixels]) {
         bool isDestroyed = false;
         if (projectiles[i]) {
             // update and check if arrow has been destroyed by collision
-            isDestroyed = !projectiles[i]->move() || !projectiles[i]->update(display);
+            isDestroyed = !projectiles[i]->update(display) || !projectiles[i]->move();
         }
         // if the projectile no longer exists then set the dangling pointer to null
         if (isDestroyed) {
@@ -41,8 +42,6 @@ ProjectileManager* ProjectileManager::getInstance() {
     }
     return instance;
 }
-
-ProjectileManager* ProjectileManager::instance = (nullptr);
 
 ProjectileManager::~ProjectileManager() {
     for (int i = 0; i < PROJECTILE_MEM_SIZE; i++) {

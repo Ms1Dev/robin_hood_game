@@ -5,6 +5,8 @@
 #include <chrono>
 
 
+class Game;
+
 class Timer {
 
 private:
@@ -17,6 +19,7 @@ private:
     float delta_time();
     bool (*onTickFunc)();
     static Timer* instance;
+    Game* game;
     
 public:
     ~Timer();
@@ -25,5 +28,6 @@ public:
     unsigned long get_ticks();
     void on_tick(bool (*method)());
     void set_fps(float fps);
+    void addGame(Game* game);
 };
 

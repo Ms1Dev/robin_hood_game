@@ -1,4 +1,5 @@
 #include "timer.h"
+#include "game.h"
 
 Timer* Timer::instance(nullptr);
 
@@ -17,6 +18,7 @@ Timer *Timer::getInstance() {
 }
 
 Timer::~Timer() {
+    delete instance;
 }
 
 bool Timer::run() {
@@ -25,7 +27,9 @@ bool Timer::run() {
     if (delta_time() >= 1 / fps) {
         reset();
         ticks++;
-        run = onTickFunc();
+        if (game) {
+            run = game->update();
+        }
     }
     return run;
 }
@@ -46,5 +50,9 @@ void Timer::on_tick(bool (*method)()) {
 
 void Timer::set_fps(float fps) {
     this->fps = fps;
+}
+
+void Timer::addGame(Game* game) {
+    this->game = game;
 }
 

@@ -7,6 +7,7 @@
 Computer::Computer(Archer* player, int unitYpos) {
 	this->player = player;
 	this->unitYpos = unitYpos;
+	spawnTicks = timer->get_ticks();
 	// set the initial spawn delay
 	spawnDelay = rand() % (spawnDelayLimit[1] - spawnDelayLimit[0]) + spawnDelayLimit[0];
 }

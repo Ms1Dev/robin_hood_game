@@ -2,13 +2,12 @@
 
 
 
-
 Projectile::Projectile(int x, int y, double speed, bool direction, bool human) : Sprite(x, y, speed, 3, 13, "arw.txt") {
     reverseImage = direction;
     this->human = human;
     folder = "arrow/";
     if (reverseImage) {
-        this->x -= 5;
+        this->x -= 10;
     }
 }
 
@@ -22,7 +21,7 @@ bool Projectile::move() {
         move_h();
     }
 
-    if (this->x + width > xPixels || x < 0) {
+    if (x + xrel + width > xPixels || x + xrel < 0) {
         stillExists = false;
     }
     return stillExists;

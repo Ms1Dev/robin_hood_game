@@ -54,6 +54,15 @@
     <ClCompile Include="display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="header.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="display.h">
@@ -95,6 +104,15 @@
     <ClInclude Include="computer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="images\arrow\arw.txt">
@@ -134,5 +152,20 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="images\archer\s0d.txt" />
+    <Text Include="images\menu\options.txt" />
+    <Text Include="images\player\c0a.txt" />
+    <Text Include="images\player\c0n.txt" />
+    <Text Include="images\player\s0a.txt" />
+    <Text Include="images\player\s0n.txt" />
+    <Text Include="images\player\w0a.txt" />
+    <Text Include="images\player\w0n.txt" />
+    <Text Include="images\player\w1a.txt" />
+    <Text Include="images\player\w1n.txt" />
+    <Text Include="images\player\w2a.txt" />
+    <Text Include="images\player\w2n.txt" />
+    <Text Include="images\menu\sureQuit.txt" />
+    <Text Include="images\menu\sureRestart.txt" />
+    <Text Include="images\header\numbers.txt" />
+    <Text Include="images\header\level.txt" />
   </ItemGroup>
 </Project>
