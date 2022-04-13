@@ -17,7 +17,6 @@ private:
     float fps;
     void reset();
     float delta_time();
-    bool (*onTickFunc)();
     static Timer* instance;
     Game* game;
     
@@ -26,8 +25,8 @@ public:
     static Timer* getInstance();
     bool run();
     unsigned long get_ticks();
-    void on_tick(bool (*method)());
     void set_fps(float fps);
     void addGame(Game* game);
+    void removeGame();
 };
 

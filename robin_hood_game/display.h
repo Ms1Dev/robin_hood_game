@@ -9,10 +9,10 @@
 
 using namespace std;
 
-// this header file is included in 2 .cpp files so extern is used to prevent redefinition error
+// global variables used for rendering the display
 extern int display[yPixels][xPixels];
 extern int headerDisplay[headerHeight][xPixels];
-extern bool global_bodyOnlyFlag;
+extern bool global_updateHeaderFlag;
 
 void draw();
 void configure_console();

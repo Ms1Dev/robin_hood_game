@@ -7,11 +7,11 @@ class Sprite;
 
 class Collision_detector {
 public:
-	~Collision_detector();
 	static Collision_detector* getInstance();
 	void detectCollisions();
 	void addSprite(Sprite* sprite);
 	void removeSprite(Sprite* sprite);
+	void clearSprites();
 private:
 	static Collision_detector* instance;
 	Collision_detector();

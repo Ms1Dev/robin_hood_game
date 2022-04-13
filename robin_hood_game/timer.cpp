@@ -44,10 +44,6 @@ float Timer::delta_time() {
     return deltaTime.count();
 }
 
-void Timer::on_tick(bool (*method)()) {
-    onTickFunc = method;
-}
-
 void Timer::set_fps(float fps) {
     this->fps = fps;
 }
@@ -55,4 +51,10 @@ void Timer::set_fps(float fps) {
 void Timer::addGame(Game* game) {
     this->game = game;
 }
+
+
+void Timer::removeGame() {
+    this->game = nullptr;
+}
+
 

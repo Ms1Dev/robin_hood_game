@@ -1,11 +1,12 @@
 #include "unit.h"
 
 
-Unit::Unit(int x, int y, int speed) :Sprite(x, y, speed, 32, 24, "s0n.txt") {
+Unit::Unit(int x, int y, int speed, int lives) :Sprite(x, y, speed, 32, 24, "s0n.txt") {
     state = 0;
     animationIndex = 0;
     animationSpeed = 5;
     animationIndex = 0;
+    this->lives = lives;
 }
 
 bool Unit::update(int(&display)[yPixels][xPixels]) {
@@ -40,11 +41,14 @@ int Unit::get_state() {
 
 
 void Unit::kill() {
+    
+    lives--;
+
     // if statement to prevent restarting animation if new collision
-    if (state != 3) {
+    if (state != 3 && lives == 0) {
         state = 3;
         animationIndex = 0;
         animationTicks = 0;
-    }
-    doesCollide = false;
+        doesCollide = false;
+    } 
 }

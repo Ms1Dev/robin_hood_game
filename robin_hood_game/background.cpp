@@ -1,6 +1,7 @@
 #include "background.h"
 #include "char2Ansi.h"
 
+Background* Background::instance = (nullptr);
 
 Background* Background::getInstance() {
     if (!instance) {
@@ -9,8 +10,7 @@ Background* Background::getInstance() {
     return instance;
 }
 
-Background::~Background() {
-}
+Background::~Background() {}
 
 void Background::update(int(&display)[yPixels][xPixels]) {
 
@@ -22,6 +22,7 @@ void Background::update(int(&display)[yPixels][xPixels]) {
     // load the image from file
     std::ifstream file("images/bg.txt");
 
+    // if height of console is changed in config then some pixels need to be ignored or image is distorted
     int heightDiff = dimensions.height - yPixels;
     int ignorePixels = heightDiff * dimensions.width;
     char pixel;
@@ -40,7 +41,7 @@ void Background::update(int(&display)[yPixels][xPixels]) {
     }
     file.close();
 
-
+    // add image to display
     for (int i = 0; i < yPixels; i++) {
         for (int j = 0; j < xPixels; j++) {
             display[i][j] = bgData[((j + scrollPos) % dimensions.width) + dimensions.width * i];
@@ -49,6 +50,7 @@ void Background::update(int(&display)[yPixels][xPixels]) {
 
     delete[] bgData;
 }
+
 
 void Background::right_scroll(int distance) {
     scrollPos -= distance;
@@ -61,6 +63,7 @@ void Background::left_scroll(int distance) {
     scrollPos += distance;
 }
 
+// this is used to make sure the units spawn at the same height even if the console is resized
 int Background::get_unit_ypos(int heightFromBottom) {
     if (dimensions.height < yPixels) {
         return dimensions.height - heightFromBottom;
@@ -74,12 +77,15 @@ int Background::get_scroll_pos() {
     return scrollPos;
 }
 
+void Background::reset_scroll_pos() {
+    scrollPos = 0;
+}
 
 Background::Background() {
     set_dimensions();
 };
 
-
+// reads the background image file to get the dimensions of the background image
 void Background::set_dimensions() {
     // load the image from file
     std::ifstream file("images/bg.txt");
@@ -102,4 +108,3 @@ void Background::set_dimensions() {
     dimensions.height = noOfPixels / nlPos;
 }
 
-Background* Background::instance = (nullptr);

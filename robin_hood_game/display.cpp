@@ -3,7 +3,7 @@
 // global variable display represents all pixels in viewable area
 int display[yPixels][xPixels];
 int headerDisplay[headerHeight][xPixels];
-bool global_bodyOnlyFlag = true;
+bool global_updateHeaderFlag = false;
 
 // used for dev to output string to console
 string text = "\033[41m";
@@ -15,29 +15,29 @@ void draw() {
     // set cursor to topleft
     COORD cursor;
     cursor.X = 0;
-    cursor.Y = (headerHeight / 2) * global_bodyOnlyFlag;
+    cursor.Y = (headerHeight / 2) * !global_updateHeaderFlag;
     SetConsoleCursorPosition(HANDLE, cursor);
 
     // declare string var to hold output
     string output;
 
-    for (int i = 0; i < yPixels + (headerHeight * !global_bodyOnlyFlag); i += 2) {
+    for (int i = 0; i < yPixels + (headerHeight * global_updateHeaderFlag); i += 2) {
         // each row of text is two rows of pixels
         int y1 = i;
         int y2 = i + 1;
         for (int j = 0; j < xPixels; j++) {
-            // prints combination of block, half block and nbsp depending on which pixels are lit up
+
             int character = 223;
 
             int upperPixel;
             int lowerPixel;
-            if (!global_bodyOnlyFlag && i < headerHeight) {
+            if (global_updateHeaderFlag && i < headerHeight) {
                 upperPixel = headerDisplay[y1][j];
                 lowerPixel = headerDisplay[y2][j];
             }
             else {
-                upperPixel = display[y1][j];
-                lowerPixel = display[y2][j];
+                upperPixel = display[y1 - global_updateHeaderFlag * headerHeight][j];
+                lowerPixel = display[y2 - global_updateHeaderFlag * headerHeight][j];
             }
 
             char buffer[sizeof(int)];
@@ -62,9 +62,9 @@ void draw() {
     // cout all rows
     cout << output;
 
-    if (!global_bodyOnlyFlag) {
-        global_bodyOnlyFlag = true;
-    }
+   if (global_updateHeaderFlag) {
+        global_updateHeaderFlag = false;
+   }
 }
 
 
@@ -82,6 +82,11 @@ void configure_console() {
     // prevent console from being resized
     HWND consoleWindow = GetConsoleWindow();
     SetWindowLong(consoleWindow, GWL_STYLE, GetWindowLong(consoleWindow, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
+
+    // prevent clicking console from stopping the program
+    DWORD mode;
+    GetConsoleMode(HANDLE, &mode);
+    SetConsoleMode(HANDLE, mode & ~ENABLE_QUICK_EDIT_MODE);
 
     // set screen buffer size
     COORD bufferDim = { xPixels + 1, (yPixels / 2) + 1 + (headerHeight / 2)};

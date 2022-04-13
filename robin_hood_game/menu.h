@@ -5,9 +5,10 @@
 
 class Menu {
 public:
-	Menu();
-	int width, height, x, y, state;
+	Menu();	
 	int listenInput();
 	void drawMenu();
+private:
+	int width, height, x, y, state;
 };
 

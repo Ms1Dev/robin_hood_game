@@ -155,6 +155,7 @@
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="unit.cpp" />
+    <ClCompile Include="widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="archer.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="timer.h" />
     <ClInclude Include="sprite.h" />
     <ClInclude Include="unit.h" />
+    <ClInclude Include="widget.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="images\archer\s0a.txt" />
@@ -190,6 +192,8 @@
     <Text Include="images\archer\w0a.txt" />
     <Text Include="images\header\numbers.txt" />
     <Text Include="images\header\level.txt" />
+    <Text Include="images\header\lives.txt" />
+    <Text Include="images\header\heart.txt" />
     <Text Include="images\menu\options.txt" />
     <Text Include="images\menu\sureQuit.txt" />
     <Text Include="images\menu\sureRestart.txt" />

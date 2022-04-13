@@ -2,14 +2,15 @@
 #include <time.h>
 
 
-Controller::Controller(Archer* player) {
+Controller::Controller(Archer* player, int mapSize) {
 	this->player = player;
+    this->mapSize = mapSize;
 }
 
-void Controller::command_update() {
+bool Controller::command_update() {
     // if player is dead do not continue
     if (player->get_state() == 3) {
-        return;
+        return false;
     }
 
     player->set_state(0);
@@ -26,7 +27,7 @@ void Controller::command_update() {
     }
     // right arrow key
     else if ((GetKeyState(39) & 0x8000)) {
-        if (player->get_x() < xPixels / 2 - 20) {
+        if (player->get_x() < xPixels / 2 - 20 || background->get_scroll_pos() > mapSize) {
             player->walk();
         }
         else {
@@ -42,6 +43,8 @@ void Controller::command_update() {
     if (GetKeyState(32) & 0x8000 && player->get_state() != 2) {
         player->shoot();
     }
+
+    return player->get_x() + player->get_width() >= xPixels;
 }
 
 

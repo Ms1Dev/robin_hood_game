@@ -8,9 +8,10 @@
 
 class Controller {
 public:
-	Controller(Archer* player);
-	void command_update();
+	Controller(Archer* player, int mapSize = 0);
+	bool command_update();
 protected:
+	int mapSize;
 	Timer* timer = Timer::getInstance();
 	Archer* player;
 	Background* background = Background::getInstance();

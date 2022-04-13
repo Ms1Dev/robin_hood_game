@@ -14,7 +14,6 @@ Computer::Computer(Archer* player, int unitYpos) {
 
 
 Computer::~Computer() {
-
 	// create an iterator for the while loop
 	std::list<Archer_Instance>::iterator iterator = archerUnits.begin();
 	// delete all instances in list

@@ -63,6 +63,9 @@
     <ClCompile Include="header.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="widget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="display.h">
@@ -111,6 +114,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="widget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -167,5 +173,7 @@
     <Text Include="images\menu\sureRestart.txt" />
     <Text Include="images\header\numbers.txt" />
     <Text Include="images\header\level.txt" />
+    <Text Include="images\header\lives.txt" />
+    <Text Include="images\header\heart.txt" />
   </ItemGroup>
 </Project>

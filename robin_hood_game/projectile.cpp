@@ -9,6 +9,10 @@ Projectile::Projectile(int x, int y, double speed, bool direction, bool human) :
     if (reverseImage) {
         this->x -= 10;
     }
+    // non human then x position is relative
+    if (!human) {
+        set_xrel(x - background->get_scroll_pos());
+    }
 }
 
 

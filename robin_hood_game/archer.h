@@ -12,8 +12,9 @@ private:
     void animate();
 
 public:
-    Archer(int x, int y, int speed, bool human);
+    Archer(int x, int y, int speed, bool human, int lives = 1);
     ~Archer();
     void shoot();
+    int* get_livesPtr();
 };
 

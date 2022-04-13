@@ -19,18 +19,20 @@ int main()
     // game loop
     while (true) {
 
-        Header header;
-        header.update();
-
         Timer* timer = Timer::getInstance();
 
         Game game;
+
+        Header header(game.getLevel(), game.getlivesPtr());
+
 
         (*timer).addGame(&game);
 
         bool run = true;
 
         while (run) {
+
+            header.update();
 
             run = (*timer).run();
 
@@ -55,6 +57,7 @@ int main()
                 }
             }
         }
+        (*timer).removeGame();
     }
   
     return 0;

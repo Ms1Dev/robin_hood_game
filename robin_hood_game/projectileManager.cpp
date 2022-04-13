@@ -43,7 +43,7 @@ ProjectileManager* ProjectileManager::getInstance() {
     return instance;
 }
 
-ProjectileManager::~ProjectileManager() {
+void ProjectileManager::clear() {
     for (int i = 0; i < PROJECTILE_MEM_SIZE; i++) {
         if (projectiles[i]) {
             delete projectiles[i];
