@@ -29,7 +29,7 @@ public:
     bool reverseImage;
     Sprite(int x, int y, int speed, int height, int width, string imageFile);
     ~Sprite();
-    bool update(int(&display)[yPixels][xPixels]);
+    bool update(int (&display)[yPixels][xPixels]);
     virtual void animate();
     virtual void kill();
     int get_x();

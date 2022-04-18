@@ -5,7 +5,7 @@
 
 class Projectile : public Sprite {
 public:
-    Projectile(int x, int y, double speed, bool direction, bool human);
+    Projectile(int x, int y, int speed, bool direction, bool human);
     ~Projectile() {}
     bool move();
 };

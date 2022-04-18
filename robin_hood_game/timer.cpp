@@ -1,5 +1,6 @@
 #include "timer.h"
 #include "game.h"
+#include "config.h"
 
 Timer* Timer::instance(nullptr);
 
@@ -7,7 +8,7 @@ Timer::Timer() {
     reset();
     deltaTime = std::chrono::duration<float>(0.0);
     ticks = 0;
-    fps = 24;
+    fps = framesPerSecond;
 }
 
 Timer *Timer::getInstance() {

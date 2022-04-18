@@ -9,7 +9,6 @@
 class Header {
 public:
 	Header(int level, int* lives);
-	int numbers[10][10][8];
 	void update();
 private:
 	int level, livesPrev;

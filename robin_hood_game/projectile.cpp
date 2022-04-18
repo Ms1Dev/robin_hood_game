@@ -2,7 +2,7 @@
 
 
 
-Projectile::Projectile(int x, int y, double speed, bool direction, bool human) : Sprite(x, y, speed, 3, 13, "arw.txt") {
+Projectile::Projectile(int x, int y, int speed, bool direction, bool human) : Sprite(x, y, speed, 3, 13, "arw.txt") {
     reverseImage = direction;
     this->human = human;
     folder = "arrow/";

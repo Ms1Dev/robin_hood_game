@@ -63,9 +63,18 @@ void Computer::update(int(&display)[yPixels][xPixels]) {
 		// reset the timer
 		spawnTicks = timer->get_ticks();
 
-		if (archerUnits.size() < 4) {
+		if (archerUnits.size() < unitLimit) {
 			newInstance();
 		}
 	}
+}
 
+
+void Computer::setUnitLimit(int limit) {
+	unitLimit = limit;
+}
+
+void Computer::setSpawnDelayLimit(int lowerLimit, int upperLimit) {
+	spawnDelayLimit[0] = lowerLimit;
+	spawnDelayLimit[1] = upperLimit;
 }

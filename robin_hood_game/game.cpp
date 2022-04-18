@@ -11,6 +11,10 @@ computer(&player, unitYpos)
     level = readLevel();
     computer.newInstance();
     lives = player.get_livesPtr();
+    // set the max number of enemy units to spawn as double the current level
+    computer.setUnitLimit(level);
+
+    computer.setSpawnDelayLimit(100 / level, 200 / level);
 }
 
 // get the current level from file

@@ -48,8 +48,6 @@ bool Controller::command_update() {
 }
 
 
-
-
 Archer_controller::Archer_controller(Archer* archer, Archer* player) : Controller::Controller(player) {
 	thisUnit = archer;
     // generate random attack and retreat distances so units dont stack on top of eachother
@@ -67,9 +65,11 @@ void Archer_controller::command_update() {
     if (thisUnit->get_state() == 3) {
         return;
     }
+
     // calculate distances from player
     int distanceToPlayer = thisUnit->get_xTotal() - player->get_x();
     int midDistance = retreatDistance + ((attackDistance - retreatDistance) / 2);
+
     // if player is closer than retreat distance then walk right
     if (state == 0 && distanceToPlayer < retreatDistance) {
         state = 2;
@@ -101,6 +101,11 @@ void Archer_controller::command_update() {
     }
 
     if (shootTicks + shootDelay < timer->get_ticks()) {
+        // random chance that a unit being chased will shoot back
+        int random = rand() % 3;
+        if (state != 0 && random == 1) {
+            thisUnit->stop(true);
+        }
         shootTicks = timer->get_ticks();
         shootDelay = rand() % 30 + 30;
         thisUnit->shoot();

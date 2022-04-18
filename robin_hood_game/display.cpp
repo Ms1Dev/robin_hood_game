@@ -69,6 +69,18 @@ void draw() {
 
 
 void configure_console() {
+
+    // throw errors if config is not correct
+    if ((yPixels % 2 != 0) | (headerHeight % 2 != 0)) {
+        throw exception("Y Pixels or Header height cannot be an odd number");
+    }
+    if (yPixels < 40) {
+        throw exception("Y pixels cannot be less than 40");
+    }
+    if ((xPixels < 150) | (xPixels > 250)) {
+        throw exception("X pixels must be between 150 - 250");
+    }
+
     // set the font size 
     CONSOLE_FONT_INFOEX font;
     font.cbSize = sizeof(font);
