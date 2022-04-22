@@ -2,6 +2,8 @@
 #include <fstream>
 #include "char2Ansi.h"
 
+
+
 Menu::Menu() {
     state = 0;
     width = 47;
@@ -17,9 +19,9 @@ void Menu::drawMenu() {
     // allocate memory to put background image
     int* imgData = new int[memSize] {};
 
-
     string filepath = "images/menu/";
-
+    
+    // set the image file to use depending on the state the menu is in
     switch (state) {
     case 0:
         filepath += "options.txt";
@@ -55,10 +57,11 @@ void Menu::drawMenu() {
     }
     delete[] imgData;
 
+    // call the display draw function
     draw();
 }
 
-
+// listen for key inputs
 int Menu::listenInput() {
     if ((GetKeyState('Q') & 0x8000)) {
         state = 2;
@@ -67,10 +70,10 @@ int Menu::listenInput() {
         state = 1;
     }
 
-    if ((GetKeyState('Y') & 0x8000)) {
+    if ((GetKeyState('Y') & 0x8000) && state != 0) {
         return state;
     }
-    else if ((GetKeyState('N') & 0x8000)) {
+    else if ((GetKeyState('N') & 0x8000) && state != 0) {
         return 9;
     }
     return 0;

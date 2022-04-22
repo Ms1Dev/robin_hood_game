@@ -27,7 +27,7 @@ int main()
         Timer* timer = Timer::getInstance();
         // create instance of game 
         Game game;
-        // create header 
+        // create header
         Header header(game.getLevel(), game.getlivesPtr());
 
         // pass reference to game to the timer so the update function can be called 

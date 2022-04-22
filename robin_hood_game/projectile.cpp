@@ -15,16 +15,12 @@ Projectile::Projectile(int x, int y, int speed, bool direction, bool human) : Sp
     }
 }
 
-
+// move the projectile on the screen 
 bool Projectile::move() {
     bool stillExists = true;
-    if (reverseImage) {
-        move_h(true);
-    }
-    else {
-        move_h();
-    }
-
+    // move in direction depending on the way projectile image is facing
+    move_h(reverseImage);
+    // if projectile goes off screen then set exists flag to false
     if (x + xrel + width > xPixels || x + xrel < 0) {
         stillExists = false;
     }

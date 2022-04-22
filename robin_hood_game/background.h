@@ -3,6 +3,9 @@
 #include <fstream>
 #include "config.h"
 
+/*
+    Singleton class that controls the background
+*/
 
 
 class Background {

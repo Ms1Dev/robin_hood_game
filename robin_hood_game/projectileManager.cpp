@@ -43,6 +43,7 @@ ProjectileManager* ProjectileManager::getInstance() {
     return instance;
 }
 
+// clear all instances of projectiles from array
 void ProjectileManager::clear() {
     for (int i = 0; i < PROJECTILE_MEM_SIZE; i++) {
         if (projectiles[i]) {

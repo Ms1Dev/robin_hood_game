@@ -5,7 +5,6 @@
 #include "widget.h"
 
 
-
 class Header {
 public:
 	Header(int level, int* lives);

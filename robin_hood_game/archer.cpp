@@ -49,6 +49,8 @@ void Archer::animate() {
         filename[0] = 's';
         if ((*timer).get_ticks() > animationTicks + animationSpeed) {
             animationTicks = (*timer).get_ticks();
+            // there is no file that has 'd' as the 3rd character so unit dissapears
+            // this gives the flashing effect
             if (filename[2] == 'd') {
                 filename[2] = 'n';
             }
@@ -56,6 +58,7 @@ void Archer::animate() {
                 filename[2] = 'd';
                 animationIndex++;
             }
+            // after 3 flashes set alive flag to false
             if (animationIndex == 3) {
                 isAlive = false;
             }

@@ -19,9 +19,10 @@ Timer *Timer::getInstance() {
 }
 
 Timer::~Timer() {
-    delete instance;
+    removeGame();
 }
 
+// calls the update function of game object on every tick
 bool Timer::run() {
     deltaTime = std::chrono::system_clock::now() - startTime;
     bool run = true;
@@ -34,6 +35,7 @@ bool Timer::run() {
     }
     return run;
 }
+
 unsigned long Timer::get_ticks() {
     return ticks;
 }
@@ -41,6 +43,7 @@ unsigned long Timer::get_ticks() {
 void Timer::reset() {
     startTime = std::chrono::system_clock::now();
 }
+
 float Timer::delta_time() {
     return deltaTime.count();
 }
@@ -52,7 +55,6 @@ void Timer::set_fps(float fps) {
 void Timer::addGame(Game* game) {
     this->game = game;
 }
-
 
 void Timer::removeGame() {
     this->game = nullptr;

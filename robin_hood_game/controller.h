@@ -6,6 +6,10 @@
 #include "timer.h"
 
 
+/*
+	This controller object takes input from the user as keypresses and controls the player unit
+*/
+
 class Controller {
 public:
 	Controller(Archer* player, int mapSize = 0);
@@ -18,6 +22,10 @@ protected:
 };
 
 
+/*
+	Controller for computer controlled archers
+	Inherits from controller and adds basic AI for controlling units
+*/
 
 
 class Archer_controller : public Controller {

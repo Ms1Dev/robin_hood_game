@@ -2,7 +2,10 @@
 
 #include <string>
 
-// base class for widgets in the header showing current level and lives
+/* 
+	base class for widgets in the header showing current leveland lives
+*/
+
 class Widget {
 protected:
 	struct Image {
@@ -22,14 +25,21 @@ protected:
 };
 
 
-class Level : Widget {
+/*
+	Level widget displays the current level and shown in the header
+*/
+
+class Level : public Widget {
 public:
 	Level();
 	void update(int value);
 };
 
+/*
+	Lives widget shows the remaining lives of the player in the header
+*/
 
-class Lives : Widget {
+class Lives : public Widget {
 public:
 	Lives();
 	void update(int value);

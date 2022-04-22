@@ -4,9 +4,17 @@
 #include "config.h"
 #include "timer.h"
 
-// pre declare classes used for this declaration
+
+// declare these classes for use in Computer declaration
 class Archer;
 class Archer_controller;
+
+/*
+	This object represents the computer player
+	It holds a list of all archer instances and updates them
+	An archer instance is the archer object and the archer_controller for that archer stored in a struct
+*/
+
 
 class Computer{
 private:

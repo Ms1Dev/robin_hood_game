@@ -28,6 +28,7 @@ void Background::update(int(&display)[yPixels][xPixels]) {
     char pixel;
     int index = 0;
     int counter = 0;
+    // read pixel data from file and ignore spaces and newlines
     while (file.get(pixel) && index < memSize) {
         if (pixel == '\n' || pixel == ' ') {
             continue;
@@ -51,7 +52,7 @@ void Background::update(int(&display)[yPixels][xPixels]) {
     delete[] bgData;
 }
 
-
+// scroll the background to the right specified amount
 void Background::right_scroll(int distance) {
     scrollPos -= distance;
     if (scrollPos < 0) {
@@ -59,6 +60,7 @@ void Background::right_scroll(int distance) {
     }
 }
 
+// scroll the background to the left specified amount
 void Background::left_scroll(int distance) {
     scrollPos += distance;
 }
@@ -104,7 +106,9 @@ void Background::set_dimensions() {
     }
     file.close();
 
+    // dimension width is the number of pixels to the first newline
     dimensions.width = nlPos;
+    // dimension height is the total pixels divided by the width
     dimensions.height = noOfPixels / nlPos;
 }
 

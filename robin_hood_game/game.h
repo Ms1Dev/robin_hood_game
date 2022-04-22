@@ -10,8 +10,11 @@
 #include "computer.h"
 #include "header.h"
 
-// container object for most of the objects used in the game
-// is destroyed on ending the level/game
+/*
+	container object for most of the objects used in the game
+	is destroyed on ending the level/game
+*/
+
 class Game {
 private:
 	ProjectileManager* projectileManager = ProjectileManager::getInstance();

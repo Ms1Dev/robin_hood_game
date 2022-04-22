@@ -4,6 +4,11 @@
 
 class Sprite;
 
+/*
+	Singleton class that has a vector containing all existing sprites
+	Checks for collisions between sprites and calls the kill function of sprites that collide
+*/
+
 
 class Collision_detector {
 public:
