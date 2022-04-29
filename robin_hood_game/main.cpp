@@ -11,16 +11,16 @@ int main()
 {
     // set the random seed
     srand(time(0));
-    
+
     // uses windows.h to apply settings to console window for better gameplay
     try {
         configure_console();
-    } 
+    }
     catch (exception error) {
         cout << error.what();
         return 0;
     }
-    
+
     // game loop
     while (true) {
         // get instance of timer
@@ -52,8 +52,10 @@ int main()
                     menu->drawMenu();
                     input = menu->listenInput();
                 }
+                // debounce the input in case it is 'p'
+                Sleep(200);
                 delete menu;
-                
+
                 // decide what to do with input from menu
                 // if not 1 or 2 then game will just continue
                 switch (input) {
@@ -71,6 +73,6 @@ int main()
         // remove this instance of game from timer when leaving loop 
         (*timer).removeGame();
     }
-  
+
     return 0;
 }

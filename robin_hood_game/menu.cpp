@@ -20,7 +20,7 @@ void Menu::drawMenu() {
     int* imgData = new int[memSize] {};
 
     string filepath = "images/menu/";
-    
+
     // set the image file to use depending on the state the menu is in
     switch (state) {
     case 0:
@@ -63,13 +63,21 @@ void Menu::drawMenu() {
 
 // listen for key inputs
 int Menu::listenInput() {
-    if ((GetKeyState('Q') & 0x8000)) {
+    // select quit game
+    if (GetKeyState('Q') & 0x8000) {
         state = 2;
     }
-    else if ((GetKeyState('R') & 0x8000)) {
+    // select reset game
+    else if (GetKeyState('R') & 0x8000) {
         state = 1;
     }
+    // if 'p' is pressed again then return 9 which will resume game with no action
+    if (GetKeyState('P') & 0x8000) {
+        return 9;
+    }
 
+    // after quit or reset is selected then listen for 'n' and 'y' for are you sure message
+    // 'y' will return the selected value 'n' will return 9 which is resume game no action
     if ((GetKeyState('Y') & 0x8000) && state != 0) {
         return state;
     }
